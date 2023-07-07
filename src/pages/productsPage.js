@@ -1,9 +1,14 @@
 import {useSelector, useDispatch} from "react-redux";
-import {add} from "../store/cartSlice";
+import {add, fetchProducts} from "../store/cartSlice";
+import {useEffect} from "react";
 
 const ProductsPage = () => {
-    const products = useSelector(state => state.cart.products.map(product => product.name))
+    const products = useSelector(state => state.cart.products.map(product => product.title))
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchProducts())
+    }, [dispatch])
 
     return (
         <div>
